@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Fuse, { type IFuseOptions } from "fuse.js";
-import { getCollection } from "astro:content";
 
 const fuseOptions: IFuseOptions<unknown> = {
   keys: ["data.title", "data.tags"],
@@ -15,27 +14,30 @@ const dateOptions = {
   day: "numeric",
 };
 
-type SearchList = {
-  searchList: {
-    id: string;
-    slug: string;
-    data: {
-      date?: Date;
-      thumbnail?: {
-        src?: string;
-        alt?: string;
-      };
-      title?: string;
-      description?: string;
-      tags?: string[];
+type SearchItem = {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
+  data: {
+    title: string;
+    description: string;
+    date: Date;
+    tags: string[];
+    thumbnail: {
+      src: string;
+      alt: string;
     };
-  }[];
+  };
 };
 
-export const Search: React.FC<SearchList> = ({ searchList }) => {
+type SearchProps = {
+  searchList: SearchItem[];
+};
+export const Search: React.FC<SearchProps> = ({ searchList }) => {
   const [query, setQuery] = useState("");
 
-  const fuse = new Fuse(searchList, fuseOptions);
+  const fuse = new Fuse<SearchItem>(searchList, fuseOptions);
 
   const recipes = fuse.search(query).map((result) => result.item);
 
@@ -81,13 +83,14 @@ export const Search: React.FC<SearchList> = ({ searchList }) => {
                       <time dateTime={data.date.toISOString()}>
                         {data.date.toLocaleDateString(
                           slug.split("/")[0],
+                          //   @ts-ignore
                           dateOptions
                         )}
                       </time>
                     </span>
 
                     <div className="font-regular flex flex-row items-center py-1 text-xs text-gray-900">
-                      {data.tags.map((tag: string, i: string) => (
+                      {data.tags.map((tag, i) => (
                         <div key={i} className="mr-1">
                           <span className="rounded-sm bg-slate-200 px-3 py-1">
                             {tag}
