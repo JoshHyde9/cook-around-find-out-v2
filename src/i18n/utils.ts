@@ -31,6 +31,7 @@ export function getRouteFromUrl(url: URL): string | undefined {
 
   if (defaultLang === currentLang) {
     const route = Object.values(routes)[0];
+    // @ts-ignore
     return route[path] !== undefined ? route[path] : undefined;
   }
 
