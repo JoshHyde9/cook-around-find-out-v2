@@ -1,0 +1,62 @@
+---
+import Tag from "./Tag.astro";
+
+interface Props {
+    recipe: {
+        date?: Date;
+    thumbnail?: {
+        src?: string;
+        alt?: string;
+    }
+    title?: string;
+    description?: string;
+    tags?: string[];
+    }
+    slug: string;
+}
+
+const { recipe, slug } = Astro.props;
+
+
+const options = {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+}
+
+const [, ...newSlug] = slug.split('/');
+
+---
+
+<a href={newSlug.toString()}>
+    <div class="flex h-full flex-col overflow-hidden rounded shadow-lg">
+      <div class="relative">
+        <img
+          class="h-full w-full object-cover"
+          src={recipe.thumbnail.src}
+          alt={recipe.thumbnail.alt}
+          width={0}
+          height={0}
+        />
+        <div class="absolute bottom-0 left-0 right-0 top-0 bg-gray-900 opacity-25 transition duration-300 hover:bg-transparent"></div>
+      </div>
+      <div class="mb-auto px-6 py-4">
+        <div>
+          <h2>{recipe.title}</h2>
+        </div>
+        <p class="text-sm text-gray-500">{recipe.description}</p>
+      </div>
+      <div class="flex flex-row items-center justify-between bg-gray-100 px-6 py-3">
+        <span class="font-regular mr-1 flex flex-row items-center py-1 text-xs text-gray-900">
+            <time datetime={recipe.date.toISOString()}> 
+                <!-- @ts-ignore  -->
+                {recipe.date.toLocaleDateString(slug.split("/")[0], options)}
+              </time>
+        </span>
+
+        <div class="font-regular mr-1 flex flex-row items-center py-1 text-xs text-gray-900">
+          {recipe.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+        </div>
+      </div>
+    </div>
+  </a>

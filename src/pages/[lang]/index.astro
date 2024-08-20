@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+
+import Base from '../../layouts/Base.astro';
+
+import { Search } from '../../components/Search';
+
+import { languages, ui } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+
+const locale = Astro.currentLocale as keyof typeof ui;
+
+const recipes = (await getCollection("recipe"))
+  .filter((recipe) => recipe.slug.split("/")[0] === locale)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+
+const t = useTranslations(locale);
+
+
+export async function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang },
+  }));
+}
+
+---
+<Base>
+  <div class="container mx-auto px-2 md:px-0">
+    <div class="my-10 text-center">
+      <h1 class="text-4xl">{t("home.title")}</h1>
+      <p class="text-neutral-500">{t("home.description")}</p>
+    </div>
+
+    <div class="mb-4">
+      <Search client:load searchList={recipes} />
+    </div>
+  </div>
+</Base>
+
