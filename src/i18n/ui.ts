@@ -9,7 +9,7 @@ export const showDefaultLang = false;
 
 export const routes = {
   es: {
-    yeet: "yeet",
+    "chili-oil": "aceite-de-chile",
   },
 };
 
