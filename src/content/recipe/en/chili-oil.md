@@ -2,7 +2,7 @@
 layout: ../../../layouts/RecipeLayout.astro
 title: Chili Oil
 description: A dressing made from vegetable oil that has been infused with chili peppers.
-date: 2024-07-10
+date: 2024-08-21
 thumbnail:
   src: https://images.pexels.com/photos/5903388/pexels-photo-5903388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2
   alt: chili oil
