@@ -1,8 +1,9 @@
 ---
 import Tag from '../components/Tag.astro';
 
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import Base from './Base.astro';
+
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -18,7 +19,7 @@ const options = {
 const date = new Date(frontmatter.date);
 ---
 
-<Base>
+<Base title={frontmatter.title} description={frontmatter.description}>
   <article class="container mx-auto mb-24 px-2 pb-12 pt-16 md:px-10 md:pt-36">
       <header class="my-12">
         <a

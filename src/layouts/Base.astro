@@ -2,6 +2,8 @@
 import { getLangFromUrl } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
+
+const { title, description } = Astro.props;
 ---
 <html lang={lang}>
     <head>
@@ -15,7 +17,9 @@ const lang = getLangFromUrl(Astro.url);
 
         <link rel="stylesheet" href="/styles/global.css" />
 
-        <title>Astro</title>
+        <meta name="og:description" content={description}>
+
+        <title>{title}</title>
     </head>
     <body>
         <slot />
