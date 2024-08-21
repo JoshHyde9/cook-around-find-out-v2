@@ -22,4 +22,4 @@ tags:
 1. Blend, pour in oil at a steady pace and salt to taste.
 
 ### Note
-Dressing will separate due to not being an emulsion. Just give it a shake before using.
+Dressing will separate due to not being an emulsion. Just give it a mix before using.
