@@ -1,6 +1,8 @@
+import type { Recipes } from "../pages/[lang]/index.astro";
+
 import { useState } from "react";
 import Fuse, { type IFuseOptions } from "fuse.js";
-import { Recipes } from "../pages/[lang]/index.astro";
+import { InferEntrySchema } from "astro:content";
 
 const fuseOptions: IFuseOptions<unknown> = {
   keys: ["data.title", "data.tags"],
@@ -20,16 +22,7 @@ type Recipe = {
   slug: string;
   body: string;
   collection: string;
-  data: {
-    title?: string;
-    description?: string;
-    date?: Date;
-    tags?: string[];
-    thumbnail?: {
-      src?: string;
-      alt?: string;
-    };
-  };
+  data: InferEntrySchema<"recipe">;
 };
 
 type SearchProps = {
