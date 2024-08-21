@@ -17,6 +17,7 @@ const recipes = (await getCollection("recipe"))
 
 const t = useTranslations(locale);
 
+export type Recipes = typeof recipes;
 
 export async function getStaticPaths() {
     return Object.keys(languages).map((lang) => ({

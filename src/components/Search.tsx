@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Fuse, { type IFuseOptions } from "fuse.js";
+import { Recipes } from "../pages/[lang]/index.astro";
 
 const fuseOptions: IFuseOptions<unknown> = {
   keys: ["data.title", "data.tags"],
@@ -14,30 +15,31 @@ const dateOptions = {
   day: "numeric",
 };
 
-type SearchItem = {
+type Recipe = {
   id: string;
   slug: string;
   body: string;
   collection: string;
   data: {
-    title: string;
-    description: string;
-    date: Date;
-    tags: string[];
-    thumbnail: {
-      src: string;
-      alt: string;
+    title?: string;
+    description?: string;
+    date?: Date;
+    tags?: string[];
+    thumbnail?: {
+      src?: string;
+      alt?: string;
     };
   };
 };
 
 type SearchProps = {
-  searchList: SearchItem[];
+  searchList: Recipes;
 };
+
 export const Search: React.FC<SearchProps> = ({ searchList }) => {
   const [query, setQuery] = useState("");
 
-  const fuse = new Fuse<SearchItem>(searchList, fuseOptions);
+  const fuse = new Fuse<Recipe>(searchList, fuseOptions);
 
   const recipes = fuse.search(query).map((result) => result.item);
 
