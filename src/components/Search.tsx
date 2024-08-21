@@ -1,8 +1,8 @@
+import type { InferEntrySchema } from "astro:content";
 import type { Recipes } from "../pages/[lang]/index.astro";
 
 import { useState } from "react";
 import Fuse, { type IFuseOptions } from "fuse.js";
-import { InferEntrySchema } from "astro:content";
 
 const fuseOptions: IFuseOptions<unknown> = {
   keys: ["data.title", "data.tags"],
