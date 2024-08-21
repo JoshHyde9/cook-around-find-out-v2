@@ -3,10 +3,11 @@ import Tag from '../components/Tag.astro';
 
 import Base from './Base.astro';
 
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslatedPath, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const { frontmatter } = Astro.props;
 
@@ -23,7 +24,7 @@ const date = new Date(frontmatter.date);
   <article class="container mx-auto mb-24 px-2 pb-12 pt-16 md:px-10 md:pt-36">
       <header class="my-12">
         <a
-          href=".."
+          href={translatePath("/", lang)}
           class="mb-12 flex gap-2 text-zinc-700 transition-all duration-300 hover:gap-4"
         >
           <span>←</span>
