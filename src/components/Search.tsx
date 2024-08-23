@@ -79,7 +79,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                         {data.date.toLocaleDateString(
                           slug.split("/")[0],
                           //   @ts-ignore
-                          dateOptions
+                          dateOptions,
                         )}
                       </time>
                     </span>
@@ -87,9 +87,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                     <div className="font-regular flex flex-row items-center py-1 text-xs text-gray-900">
                       {data.tags.map((tag, i) => (
                         <div key={i} className="mr-1">
-                          <span className="rounded-sm bg-slate-200 px-3 py-1">
-                            {tag}
-                          </span>
+                          <span className="rounded-sm bg-slate-200 px-3 py-1">{tag}</span>
                         </div>
                       ))}
                     </div>
@@ -122,7 +120,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                         {data.date.toLocaleDateString(
                           slug.split("/")[0],
                           //   @ts-ignore
-                          dateOptions
+                          dateOptions,
                         )}
                       </time>
                     </span>
@@ -130,9 +128,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                     <div className="font-regular flex flex-row items-center py-1 text-xs text-gray-900">
                       {data.tags.map((tag, i) => (
                         <div key={i} className="mr-1">
-                          <span className="rounded-sm bg-slate-200 px-3 py-1">
-                            {tag}
-                          </span>
+                          <span className="rounded-sm bg-slate-200 px-3 py-1">{tag}</span>
                         </div>
                       ))}
                     </div>

@@ -1,13 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-import Base from '../../layouts/Base.astro';
+import Base from "../../layouts/Base.astro";
 
-import { Search } from '../../components/Search';
+import { Search } from "../../components/Search";
 
-import { languages, ui } from '../../i18n/ui';
-import { useTranslations } from '../../i18n/utils';
-
+import { languages, ui } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
 
 const locale = Astro.currentLocale as keyof typeof ui;
 
@@ -20,12 +19,12 @@ const t = useTranslations(locale);
 export type Recipes = typeof recipes;
 
 export async function getStaticPaths() {
-    return Object.keys(languages).map((lang) => ({
-        params: { lang },
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
   }));
 }
-
 ---
+
 <Base title={t("home.title")} description={t("home.description")}>
   <div class="container mx-auto px-2 md:px-0">
     <div class="my-10 text-center">
@@ -38,4 +37,3 @@ export async function getStaticPaths() {
     </div>
   </div>
 </Base>
-

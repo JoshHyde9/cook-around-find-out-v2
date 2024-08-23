@@ -35,10 +35,7 @@ export function getRouteFromUrl(url: URL): string | undefined {
     return route[path] !== undefined ? route[path] : undefined;
   }
 
-  const getKeyByValue = (
-    obj: Record<string, string>,
-    value: string
-  ): string | undefined => {
+  const getKeyByValue = (obj: Record<string, string>, value: string): string | undefined => {
     return Object.keys(obj).find((key) => obj[key] === value);
   };
 

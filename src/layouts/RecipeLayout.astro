@@ -1,9 +1,9 @@
 ---
-import Tag from '../components/Tag.astro';
+import Tag from "../components/Tag.astro";
 
-import Base from './Base.astro';
+import Base from "./Base.astro";
 
-import { getLangFromUrl, useTranslatedPath, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -12,52 +12,56 @@ const translatePath = useTranslatedPath(lang);
 const { frontmatter } = Astro.props;
 
 const options = {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-}
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
 
 const date = new Date(frontmatter.date);
 ---
 
 <Base title={frontmatter.title} description={frontmatter.description}>
   <article class="container mx-auto mb-24 px-2 pb-12 pt-16 md:px-10 md:pt-36">
-      <header class="my-12">
-        <a
-          href={translatePath("/", lang)}
-          class="mb-12 flex gap-2 text-zinc-700 transition-all duration-300 hover:gap-4"
-        >
-          <span>←</span>
-          <span>{t("messages.return-previous-page")}</span>
-        </a>
+    <header class="my-12">
+      <a
+        href={translatePath("/", lang)}
+        class="mb-12 flex gap-2 text-zinc-700 transition-all duration-300 hover:gap-4"
+      >
+        <span>←</span>
+        <span>{t("messages.return-previous-page")}</span>
+      </a>
 
-        <ul class="flex list-none flex-wrap gap-2 md:gap-3">
-          {frontmatter.tags.map((tag: string) => (
+      <ul class="flex list-none flex-wrap gap-2 md:gap-3">
+        {
+          frontmatter.tags.map((tag: string) => (
             <li>
               <Tag>{tag}</Tag>
             </li>
-          ))}
-        </ul>
+          ))
+        }
+      </ul>
 
-        <h1 class="text-4xl leading-[53px] tracking-tighter md:my-6 md:text-6xl md:leading-[73px]">
-          {frontmatter.title}
-        </h1>
+      <h1 class="text-4xl leading-[53px] tracking-tighter md:my-6 md:text-6xl md:leading-[73px]">
+        {frontmatter.title}
+      </h1>
 
-        <time class="text-balance block text-base leading-6 text-zinc-700">
-          {t("messages.updated")}{" "}
-          <time datetime={date.toISOString()}> 
-            <!-- @ts-ignore  -->
-            {date.toLocaleDateString(lang, options)}
-          </time>
+      <time class="block text-balance text-base leading-6 text-zinc-700">
+        {t("messages.updated")}{" "}
+        <time datetime={date.toISOString()}>
+          <!-- @ts-ignore  -->
+          {date.toLocaleDateString(lang, options)}
         </time>
+      </time>
 
-        <p class="leading-1 mb-24 text-xl font-medium md:text-3xl">
-          {frontmatter.description}
-        </p>
-      </header>
+      <p class="leading-1 mb-24 text-xl font-medium md:text-3xl">
+        {frontmatter.description}
+      </p>
+    </header>
 
-      <div class="prose-img:breakout list-disc prose-base prose-zinc max-w-none lg:prose-xl prose-img:mb-24 prose-img:rounded-md prose-img:shadow-lg">
-        <slot />
-      </div>
-    </article>
+    <div
+      class="prose-img:breakout prose-base prose-zinc max-w-none list-disc lg:prose-xl prose-img:mb-24 prose-img:rounded-md prose-img:shadow-lg"
+    >
+      <slot />
+    </div>
+  </article>
 </Base>

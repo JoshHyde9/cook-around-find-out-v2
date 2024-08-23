@@ -1,0 +1,9 @@
+node_modules/**
+.vscode/**
+dist/**
+
+src/content/**
+
+.prettierrc.mjs
+pnpm-lock.yaml
+package.json
