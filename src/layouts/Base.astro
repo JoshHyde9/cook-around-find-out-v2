@@ -1,4 +1,6 @@
 ---
+import Footer from '../components/Footer.astro';
+
 import { getLangFromUrl } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -22,6 +24,9 @@ const { title, description } = Astro.props;
         <title>{title}</title>
     </head>
     <body>
-        <slot />
+        <main class="flex min-h-screen flex-col p-4 md:p-24">
+            <slot />
+        </main>
+        <Footer />
     </body>
 </html>
