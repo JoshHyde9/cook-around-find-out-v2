@@ -78,7 +78,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                       <time dateTime={data.date.toISOString()}>
                         {data.date.toLocaleDateString(
                           slug.split("/")[0],
-                          //   @ts-ignore
+                          // @ts-expect-error types are weird and I can't work it out
                           dateOptions,
                         )}
                       </time>
@@ -119,7 +119,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                       <time dateTime={data.date.toISOString()}>
                         {data.date.toLocaleDateString(
                           slug.split("/")[0],
-                          //   @ts-ignore
+                          //   @ts-expect-error types are weird and I can't work it out
                           dateOptions,
                         )}
                       </time>

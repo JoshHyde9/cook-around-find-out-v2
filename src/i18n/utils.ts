@@ -31,7 +31,8 @@ export function getRouteFromUrl(url: URL): string | undefined {
 
   if (defaultLang === currentLang) {
     const route = Object.values(routes)[0];
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore path is any for some reason in build
     return route[path] !== undefined ? route[path] : undefined;
   }
 
