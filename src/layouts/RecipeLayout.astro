@@ -3,7 +3,7 @@ import Tag from "../components/Tag.astro";
 
 import Base from "./Base.astro";
 
-import { getLangFromUrl, getRouteFromUrl, useTranslatedPath, useTranslations } from "../i18n/utils";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -27,7 +27,7 @@ const date = new Date(frontmatter.date);
     basic: {
       description: frontmatter.description,
       title: frontmatter.title,
-      url: Astro.site!.href,
+      url: Astro.site!.href + Astro.url.pathname.slice(1),
       imageUrl: frontmatter.thumbnail.src,
     },
   }}
