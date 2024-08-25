@@ -3,7 +3,7 @@ import Tag from "../components/Tag.astro";
 
 import Base from "./Base.astro";
 
-import { getLangFromUrl, useTranslatedPath, useTranslations } from "../i18n/utils";
+import { getLangFromUrl, getRouteFromUrl, useTranslatedPath, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -20,7 +20,23 @@ const options = {
 const date = new Date(frontmatter.date);
 ---
 
-<Base title={frontmatter.title} description={frontmatter.description}>
+<Base
+  title={frontmatter.title}
+  description={frontmatter.description}
+  openGraph={{
+    basic: {
+      description: frontmatter.description,
+      title: frontmatter.title,
+      url: Astro.url.href,
+      imageUrl: frontmatter.thumbnail.src,
+    },
+  }}
+  twitter={{
+    title: frontmatter.title,
+    description: frontmatter.description,
+    image: frontmatter.thumbnail.src,
+  }}
+>
   <article class="container mx-auto mb-24 px-2 pb-12 pt-16 md:px-10 md:pt-36">
     <header class="my-12">
       <a

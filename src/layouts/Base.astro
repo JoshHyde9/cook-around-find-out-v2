@@ -5,7 +5,26 @@ import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 
-const { title, description } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  openGraph: {
+    basic: {
+      title: string;
+      description: string;
+      imageUrl: string;
+      url: string;
+    }
+  },
+  twitter: {
+    title: string;
+    description: string;
+    image: string;
+    site?: string;
+  }
+}
+
+const { title, description, openGraph, twitter } = Astro.props;
 ---
 
 <html lang={lang}>
@@ -23,7 +42,20 @@ const { title, description } = Astro.props;
 
     <link rel="stylesheet" href="/styles/global.css" />
 
-    <meta name="og:description" content={description} />
+    <meta name="description" content={description}>
+
+    <!-- Open Graph -->
+    <meta name="og:title" content={openGraph.basic.title} />
+    <meta name="og:description" content={openGraph.basic.description} />
+    <meta name="og:image" content={openGraph.basic.imageUrl} />
+    <meta name="og:url" content={openGraph.basic.url} />
+
+    <!-- Twitter -->
+    <meta name="twitter:title" content={twitter.title} />
+    <meta name="twitter:description" content={twitter.description} />
+    <meta name="twitter:image" content={twitter.image} />
+    <meta name="twitter:site" content={twitter.site ? twitter.site : "@JoshHyde9"} />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <title>{title}</title>
   </head>
