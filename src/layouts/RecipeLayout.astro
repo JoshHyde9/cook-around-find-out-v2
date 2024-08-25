@@ -27,7 +27,7 @@ const date = new Date(frontmatter.date);
     basic: {
       description: frontmatter.description,
       title: frontmatter.title,
-      url: Astro.site.href,
+      url: Astro.site!.href,
       imageUrl: frontmatter.thumbnail.src,
     },
   }}
