@@ -33,13 +33,13 @@ export async function getStaticPaths() {
       title: t("home.title"),
       description: t("home.description"),
       url: Astro.site!.href,
-      imageUrl: "/public/logo-1000.jpg",
+      imageUrl: `${import.meta.env.SITE}/logo-1000.jpg`,
     },
   }}
   twitter={{
     title: t("home.title"),
     description: t("home.description"),
-    image: "/public/logo-1000.jpg",
+    image: `${import.meta.env.SITE}/logo-1000.jpg`,
   }}
 >
   <div class="container mx-auto px-2 md:px-0">
