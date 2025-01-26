@@ -13,5 +13,9 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  site: "https://cook-around-find-out-v2.vercel.app"
+  site: "https://cook-around-find-out-v2.vercel.app",
+  // TODO: Convert to Astro Content Layer
+  legacy: {
+    collections: true
+  }
 });
