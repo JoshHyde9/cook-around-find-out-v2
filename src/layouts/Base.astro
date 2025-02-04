@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 import Footer from "../components/Footer.astro";
 
 import { getLangFromUrl } from "../i18n/utils";
@@ -39,8 +41,6 @@ const { title, description, openGraph, twitter } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="/styles/global.css" />
 
     <meta name="description" content={description}>
 

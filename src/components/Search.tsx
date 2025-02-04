@@ -1,4 +1,4 @@
-import type { InferEntrySchema } from "astro:content";
+import type { InferEntrySchema, RenderedContent } from "astro:content";
 import type { Recipes } from "../pages/[lang]/index.astro";
 
 import { useState } from "react";
@@ -19,10 +19,11 @@ const dateOptions = {
 
 type Recipe = {
   id: string;
-  slug: string;
-  body: string;
-  collection: string;
-  data: InferEntrySchema<"recipe">;
+    body?: string;
+    collection: "recipe";
+    data: InferEntrySchema<"recipe">;
+    rendered?: RenderedContent;
+    filePath?: string;
 };
 
 type SearchProps = {
@@ -54,8 +55,8 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
 
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {query.length >= 2
-          ? recipes.map(({ id, data, slug }) => (
-              <a key={id} href={slug.split("/")[1].toString()}>
+          ? recipes.map(({ id, data }) => (
+              <a key={id} href={id.split("/")[1].toString()}>
                 <div className="flex h-full flex-col overflow-hidden rounded shadow-lg">
                   <div className="relative">
                     <img
@@ -77,7 +78,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                     <span className="font-regular mr-1 flex flex-row items-center py-1 text-xs text-gray-900">
                       <time dateTime={data.date.toISOString()}>
                         {data.date.toLocaleDateString(
-                          slug.split("/")[0],
+                          id.split("/")[0],
                           // @ts-expect-error types are weird and I can't work it out
                           dateOptions,
                         )}
@@ -95,8 +96,8 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                 </div>
               </a>
             ))
-          : searchList.map(({ id, data, slug }) => (
-              <a key={id} href={slug.split("/")[1].toString()}>
+          : searchList.map(({ id, data }) => (
+              <a key={id} href={id.split("/")[1].toString()}>
                 <div className="flex h-full flex-col overflow-hidden rounded shadow-lg">
                   <div className="relative">
                     <img
@@ -118,7 +119,7 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                     <span className="font-regular mr-1 flex flex-row items-center py-1 text-xs text-gray-900">
                       <time dateTime={data.date.toISOString()}>
                         {data.date.toLocaleDateString(
-                          slug.split("/")[0],
+                          id.split("/")[0],
                           //   @ts-expect-error types are weird and I can't work it out
                           dateOptions,
                         )}

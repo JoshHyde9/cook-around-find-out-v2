@@ -1,3 +1,4 @@
+import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
 const recipeCollection = defineCollection({
@@ -11,6 +12,7 @@ const recipeCollection = defineCollection({
       alt: z.string(),
     }),
   }),
+  loader: glob({ pattern: "**/**.md", base: "./src/content/recipe" })
 });
 
 export const collections = {

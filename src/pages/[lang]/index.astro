@@ -11,7 +11,7 @@ import { useTranslations } from "../../i18n/utils";
 const locale = Astro.currentLocale as keyof typeof ui;
 
 const recipes = (await getCollection("recipe"))
-  .filter((recipe) => recipe.slug.split("/")[0] === locale)
+  .filter((recipe) => recipe.id.split("/")[0] === locale)
   .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
 
 const t = useTranslations(locale);
