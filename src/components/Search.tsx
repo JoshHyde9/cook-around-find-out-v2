@@ -4,17 +4,13 @@ import type { Recipes } from "../pages/[lang]/index.astro";
 import { useState } from "react";
 import Fuse, { type IFuseOptions } from "fuse.js";
 
+import { dateOptions } from "../utils/types";
+
 const fuseOptions: IFuseOptions<unknown> = {
   keys: ["data.title", "data.tags"],
   includeMatches: true,
   minMatchCharLength: 2,
   threshold: 0.5,
-};
-
-const dateOptions = {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
 };
 
 type Recipe = {
@@ -79,7 +75,6 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                       <time dateTime={data.date.toISOString()}>
                         {data.date.toLocaleDateString(
                           id.split("/")[0],
-                          // @ts-expect-error types are weird and I can't work it out
                           dateOptions,
                         )}
                       </time>
@@ -120,7 +115,6 @@ export const Search: React.FC<SearchProps> = ({ searchList }) => {
                       <time dateTime={data.date.toISOString()}>
                         {data.date.toLocaleDateString(
                           id.split("/")[0],
-                          //   @ts-expect-error types are weird and I can't work it out
                           dateOptions,
                         )}
                       </time>

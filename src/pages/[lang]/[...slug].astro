@@ -7,6 +7,8 @@ import { getLangFromUrl, useTranslatedPath, useTranslations } from "../../i18n/u
 import Base from "../../layouts/Base.astro";
 import Tag from "../../components/Tag.astro";
 
+import { dateOptions } from "../../utils/types";
+
 export const getStaticPaths = (async () => {
   const recipes = await getCollection("recipe");
 
@@ -30,12 +32,6 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
 const { data } = page;
-
-const options = {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-};
 
 const date = new Date(data.date);
 ---
@@ -84,8 +80,7 @@ const date = new Date(data.date);
       <time class="block text-base leading-6 text-balance text-zinc-700">
         {t("messages.updated")}{" "}
         <time datetime={date.toISOString()}>
-          <!-- @ts-ignore  -->
-          {date.toLocaleDateString(lang, options)}
+          {date.toLocaleDateString(lang, dateOptions)}
         </time>
       </time>
 
